@@ -1,0 +1,93 @@
+//
+//  SharedNote.swift
+//  FamilyBook
+//
+//  Created by Татьяна Макеева on 12.12.2025.
+//
+
+
+/*
+ n @XREF:SNOTE@ SNOTE <Text> {1:1} g7:record-SNOTE
+ +1 MIME <MediaType> {0:1} g7:MIME
+ +1 LANG <Language> {0:1} g7:LANG
+ +1 TRAN <Text> {0:M} g7:NOTE-TRAN
+ +2 MIME <MediaType> {0:1} g7:MIME
+ +2 LANG <Language> {0:1} g7:LANG
+ +1 <<SOURCE_CITATION>> {0:M}
+ +1 <<IDENTIFIER_STRUCTURE>> {0:M}
+ +1 <<CHANGE_DATE>> {0:1}
+ +1 <<CREATION_DATE>> {0:1}
+ 
+ */
+
+public class SharedNote: RecordProtocol {
+    public var xref: String
+    public var text: String = ""
+    public var mimeType: String?
+    public var lang: String?
+    public var translations: [Translation] = []
+    public var citations: [SourceCitation] = []
+    public var identifiers: [IdentifierStructure] = []
+    public var changeDate: ChangeDate?
+    public var creationDate: CreationDate?
+    
+    nonisolated(unsafe) static let keys: [String: AnyKeyPath] = [
+        "MIME": \SharedNote.mimeType,
+        "LANG": \SharedNote.lang,
+        "TRAN": \SharedNote.translations,
+        "SOUR": \SharedNote.citations,
+        "REFN": \SharedNote.identifiers,
+        "UID": \SharedNote.identifiers,
+        "EXID": \SharedNote.identifiers,
+        "CHAN": \SharedNote.changeDate,
+        "CREA": \SharedNote.creationDate
+    ]
+    
+    init(xref: String, text: String, mime: String? = nil, lang: String? = nil) {
+        self.xref = xref
+        self.text = text
+        self.mimeType = mime
+        self.lang = lang
+    }
+    
+    required init(record: Record) throws {
+        self.xref = record.line.xref ?? ""
+        self.text = record.line.value ?? ""
+        try updateFromRecord(record, keys: Self.keys)
+    }
+    
+    func export() -> Record {
+        let record = Record(level: 0, xref: xref, tag: "SNOTE", value: text)
+        
+        if let mimeType {
+            record.children += [Record(level: 1, tag: "MIME", value: mimeType)]
+        }
+        
+        if let lang {
+            record.children += [Record(level: 1, tag: "LANG", value: lang)]
+        }
+        
+        for translation in translations {
+            record.children += [translation.export()]
+        }
+        
+        for citation in citations {
+            record.children += [citation.export()]
+        }
+        
+        for identifier in identifiers {
+            record.children += [identifier.export()]
+        }
+        
+        if let changeDate {
+            record.children += [changeDate.export()]
+        }
+        
+        if let creationDate {
+            record.children += [creationDate.export()]
+        }
+        
+        record.setLevel(0)
+        return record
+    }
+}
