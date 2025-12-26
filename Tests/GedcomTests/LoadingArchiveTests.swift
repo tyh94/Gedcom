@@ -8,20 +8,21 @@
 import Testing
 import Foundation
 @testable import Gedcom
+import ZIPFoundation
 
-@Suite("Load Gedcom File") struct LoadingTests {
+@Suite("Load Gedcom Archive") struct LoadingArchiveTests {
     let parser = GedcomParser()
     
     @Test func testLoadMinArchive() async throws {
         let module = Bundle.module
         guard
             let resourceURL = module.url(forResource: "Gedcom7/minimal70",
-                                         withExtension: "ged") else {
-            Issue.record("Resource 'Gedcom7/minimal70.ged' not found in bundle")
+                                         withExtension: "gdz") else {
+            Issue.record("Resource 'Gedcom7/minimal70.gzd' not found in bundle")
             return
         }
         
-        let ged = try parser.parse(withFile: resourceURL)
+        let ged = try parser.parse(withArchive: resourceURL)
         #expect(ged.familyRecords.count == 0)
         #expect(ged.individualRecords.count == 0)
         #expect(ged.multimediaRecords.count == 0)
@@ -32,10 +33,10 @@ import Foundation
     }
 }
 
-@Suite("Load Max File") struct MaxLoaderTests {
+@Suite("Load Max Archive") struct MaxArchiveLoaderTests {
     let module = Bundle.module
     let resourceURL = Bundle.module.url(forResource: "Gedcom7/maximal70",
-                                        withExtension: "ged")!
+                                        withExtension: "gdz")!
     let parser = GedcomParser()
     let ged: GedcomFile
     let submitterRecordsMap: [String: Submitter]
@@ -46,7 +47,7 @@ import Foundation
     let sharedNoteRecordsMap: [String: SharedNote]
     let sourceRecordsMap: [String: Source]
     init() throws {
-        ged = try parser.parse(withFile: resourceURL)
+        ged = try parser.parse(withArchive: resourceURL)
         submitterRecordsMap = ged.submitterRecords.reduce(into: [:]) { $0[$1.xref] = $1 }
         familyRecordsMap = ged.familyRecords.reduce(into: [:]) { $0[$1.xref] = $1 }
         individualRecordsMap = ged.individualRecords.reduce(into: [:]) { $0[$1.xref] = $1 }
@@ -601,7 +602,7 @@ import Foundation
         #expect(multimediaRecordsMap["@O1@"]!.restrictions == [.CONFIDENTIAL, .LOCKED])
         #expect(multimediaRecordsMap["@O1@"]!.files.count == 2)
         // In the GDZ the path is not a file url, otherwise a file: url
-        #expect(multimediaRecordsMap["@O1@"]!.files[0].path == "file:///path/to/file1")
+        #expect(multimediaRecordsMap["@O1@"]!.files[0].path == "path/to/file1")
         #expect(multimediaRecordsMap["@O1@"]!.files[0].form.form == "text/plain")
         #expect(multimediaRecordsMap["@O1@"]!.files[0].form.medium?.kind == .other)
         #expect(multimediaRecordsMap["@O1@"]!.files[0].form.medium?.phrase == "Transcript")

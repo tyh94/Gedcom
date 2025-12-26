@@ -21,7 +21,7 @@ public class Medium: RecordProtocol {
     }
     
     required init(record: Record) throws {
-        kind = MediumKind(rawValue: record.line.value ?? "OTHER") ?? .OTHER
+        kind = MediumKind(rawValue: record.line.value ?? "OTHER") ?? .other
         try updateFromRecord(record, keys: Self.keys)
     }
     

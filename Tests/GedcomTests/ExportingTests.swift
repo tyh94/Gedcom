@@ -1190,7 +1190,7 @@ import Foundation
     media.restrictions = [.CONFIDENTIAL, .LOCKED]
     media.files += [MultimediaFile(path: "path/to/file1",
                                    form: MultimediaFileForm(form: "text/plain",
-                                                            medium: Medium(kind: .OTHER,
+                                                            medium: Medium(kind: .other,
                                                                            phrase: "Transcript")
                                                            )
                                   )
@@ -1431,16 +1431,16 @@ import Foundation
     source.sourceRepoCitation[0].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .book, phrase: "Booklet"))]
 
     source.sourceRepoCitation += [SourceRepositoryCitation(xref: "@R2@")]
-    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .VIDEO))]
+    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .video))]
     source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .card))]
     source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .fiche))]
     source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .film))]
-    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .MAGAZINE))]
-    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .MANUSCRIPT))]
-    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .MAP))]
-    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .NEWSPAPER))]
+    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .magazine))]
+    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .manuscript))]
+    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .map))]
+    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .newspaper))]
     source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .photo))]
-    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .TOMBSTONE))]
+    source.sourceRepoCitation[1].callNumbers += [CallNumber(callNumber: "Call number", medium: Medium(kind: .tombstone))]
 
     source.identifiers.append(.Refn(REFN(ident: "1", type: "User-generated identifier")))
     source.identifiers.append(.Refn(REFN(ident: "10", type: "User-generated identifier")))
