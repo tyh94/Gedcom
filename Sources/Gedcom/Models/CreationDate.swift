@@ -11,8 +11,7 @@ public class CreationDate: RecordProtocol {
         "DATE": \CreationDate.date,
     ]
     
-    init(date: String, time: String? = nil)
-    {
+    public init(date: String, time: String? = nil) {
         self.date = DateTime(date: date, time: time)
     }
     

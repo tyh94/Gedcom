@@ -40,10 +40,34 @@ public class Submitter: RecordProtocol {
         "CREA": \Submitter.creationDate
     ]
     
-    init(xref: String, name: String)
-    {
+    public init(
+        xref: String,
+        name: String = "",
+        address: AddressStructure?,
+        phone: [String] = [],
+        email: [String] = [],
+        fax: [String] = [],
+        www: [URL] = [],
+        multimediaLinks: [MultimediaLink] = [],
+        languages: [String] = [],
+        identifiers: [IdentifierStructure] = [],
+        notes: [NoteStructure] = [],
+        changeDate: ChangeDate? = nil,
+        creationDate: CreationDate? = nil
+    ) {
         self.xref = xref
         self.name = name
+        self.address = address
+        self.phone = phone
+        self.email = email
+        self.fax = fax
+        self.www = www
+        self.multimediaLinks = multimediaLinks
+        self.languages = languages
+        self.identifiers = identifiers
+        self.notes = notes
+        self.changeDate = changeDate
+        self.creationDate = creationDate
     }
     
     required init(record: Record) throws {

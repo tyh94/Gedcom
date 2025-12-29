@@ -22,7 +22,7 @@ public class PersonalNameTranslation: RecordProtocol {
         "NSFX" : \PersonalNameTranslation.namePieces,
     ]
     
-    init(name: String, lang: String, namePieces: [PersonalNamePiece] = []) {
+    public init(name: String, lang: String, namePieces: [PersonalNamePiece] = []) {
         self.name = name
         self.lang = lang
         self.namePieces = namePieces

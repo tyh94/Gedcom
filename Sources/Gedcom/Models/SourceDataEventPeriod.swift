@@ -12,10 +12,11 @@ public class SourceDataEventPeriod: RecordProtocol {
         "PHRASE": \SourceDataEventPeriod.phrase,
     ]
     
-    init(date: String, phrase: String? = nil) {
+    public init(date: String, phrase: String? = nil) {
         self.date = date
         self.phrase = phrase
     }
+    
     required init(record: Record) throws {
         self.date = record.line.value ?? ""
         try updateFromRecord(record, keys: Self.keys)

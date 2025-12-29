@@ -30,8 +30,24 @@ public class Multimedia: RecordProtocol {
         "CREA" : \Multimedia.creationDate
     ]
     
-    public init(xref: String) {
+    public init(
+        xref: String,
+        restrictions: [Restriction] = [],
+        files: [MultimediaFile] = [],
+        citations: [SourceCitation] = [],
+        notes: [NoteStructure] = [],
+        identifiers: [IdentifierStructure] = [],
+        changeDate: ChangeDate? = nil,
+        creationDate: CreationDate? = nil
+    ) {
         self.xref = xref
+        self.restrictions = restrictions
+        self.files = files
+        self.citations = citations
+        self.notes = notes
+        self.identifiers = identifiers
+        self.changeDate = changeDate
+        self.creationDate = creationDate
     }
     
     required init(record: Record) throws {

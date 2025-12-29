@@ -112,14 +112,56 @@ public class Individual: RecordProtocol {
         
     ]
     
-    public init(xref: String) {
+    public init(
+        xref: String,
+        restrictions: [Restriction] = [],
+        names: [PersonalName] = [],
+        sex: Sex? = nil,
+        attributes: [IndividualAttributeStructure] = [],
+        events: [IndividualEvent] = [],
+        nonEvents: [NonEventStructure] = [],
+        ldsDetails: [LdsIndividualOrdinance] = [],
+        childOfFamilies: [FamilyChild] = [],
+        spouseFamilies: [FamilySpouse] = [],
+        submitters: [String] = [],
+        associations: [AssoiciationStructure] = [],
+        aliases: [PhraseRef] = [],
+        ancestorInterest: [String] = [],
+        decendantInterest: [String] = [],
+        identifiers: [IdentifierStructure] = [],
+        notes: [NoteStructure] = [],
+        citations: [SourceCitation] = [],
+        multimediaLinks: [MultimediaLink] = [],
+        changeDate: ChangeDate? = nil,
+        creationDate: CreationDate? = nil
+    ) {
         self.xref = xref
+        self.restrictions = restrictions
+        self.names = names
+        self.sex = sex
+        self.attributes = attributes
+        self.events = events
+        self.nonEvents = nonEvents
+        self.ldsDetails = ldsDetails
+        self.childOfFamilies = childOfFamilies
+        self.spouseFamilies = spouseFamilies
+        self.submitters = submitters
+        self.associations = associations
+        self.aliases = aliases
+        self.ancestorInterest = ancestorInterest
+        self.decendantInterest = decendantInterest
+        self.identifiers = identifiers
+        self.notes = notes
+        self.citations = citations
+        self.multimediaLinks = multimediaLinks
+        self.changeDate = changeDate
+        self.creationDate = creationDate
     }
+    
     required init(record: Record) throws {
         self.xref = record.line.xref ?? ""
         try updateFromRecord(record, keys: Self.keys)
     }
-    
     
     func export() -> Record {
         let record = Record(level: 0, xref: xref, tag: "INDI")

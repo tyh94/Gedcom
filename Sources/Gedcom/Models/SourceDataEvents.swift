@@ -14,9 +14,16 @@ public class SourceDataEvents: RecordProtocol {
         "PLAC": \SourceDataEvents.place,
     ]
     
-    init(types: [String]) {
-        eventTypes = types
+    public init(
+        eventTypes: [String] = [],
+        period: SourceDataEventPeriod? = nil,
+        place: PlaceStructure? = nil
+    ) {
+        self.eventTypes = eventTypes
+        self.period = period
+        self.place = place
     }
+    
     required init(record: Record) throws {
         self.eventTypes = (record.line.value ?? "")
             .components(separatedBy: ",")

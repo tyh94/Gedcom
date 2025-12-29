@@ -37,15 +37,16 @@ public class LdsIndividualOrdinance: RecordProtocol {
         "FAMC" : \LdsIndividualOrdinance.familyChild,
     ]
     
-    init(kind: LdsIndividualOrdinanceKind,
-         date: DateValue? = nil,
-         temple: String? = nil,
-         familyChild: String? = nil,
-         place: PlaceStructure? = nil,
-         status: LdsOrdinanceStatus? = nil,
-         notes: [NoteStructure] = [],
-         citations: [SourceCitation] = [])
-    {
+    public init(
+        kind: LdsIndividualOrdinanceKind,
+        date: DateValue? = nil,
+        temple: String? = nil,
+        familyChild: String? = nil,
+        place: PlaceStructure? = nil,
+        status: LdsOrdinanceStatus? = nil,
+        notes: [NoteStructure] = [],
+        citations: [SourceCitation] = []
+    ) {
         self.kind = kind
         self.date = date
         self.temple = temple

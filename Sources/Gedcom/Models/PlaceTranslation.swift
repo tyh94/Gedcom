@@ -13,7 +13,7 @@ public class PlaceTranslation: RecordProtocol {
         "LANG" : \PlaceTranslation.lang
     ]
     
-    init(place: [String], lang: String) {
+    public init(place: [String], lang: String) {
         self.place = place
         self.lang = lang
     }

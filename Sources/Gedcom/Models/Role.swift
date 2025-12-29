@@ -15,7 +15,7 @@ public class Role: RecordProtocol {
         "PHRASE" : \Role.phrase,
     ]
     
-    init(kind: RoleKind, phrase: String? = nil) {
+    public init(kind: RoleKind, phrase: String? = nil) {
         self.kind = kind
         self.phrase = phrase
     }

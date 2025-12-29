@@ -14,12 +14,12 @@ public class PlaceCoordinates: RecordProtocol {
         "LONG": \PlaceCoordinates.longitude,
     ]
     
-    init(latitude: Latitude, longitude: Longitude) {
+    public init(latitude: Latitude, longitude: Longitude) {
         self.latitude = latitude
         self.longitude = longitude
     }
     
-    init(lat: Double, lon: Double) {
+    public init(lat: Double, lon: Double) {
         self.latitude = Latitude(degrees: lat)
         self.longitude = Longitude(degrees: lon)
     }

@@ -14,11 +14,12 @@ public class SourceText: RecordProtocol {
         "LANG": \SourceText.lang,
     ]
     
-    init(text: String, mime: String? = nil, lang: String? = nil) {
+    public init(text: String, mime: String? = nil, lang: String? = nil) {
         self.text = text
         self.mimeType = mime
         self.lang = lang
     }
+    
     required init(record: Record) throws {
         text = record.line.value ?? ""
         try updateFromRecord(record, keys: Self.keys)

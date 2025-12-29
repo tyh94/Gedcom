@@ -21,6 +21,7 @@ public class PhraseRef: RecordProtocol {
         self.xref = xref
         self.phrase = phrase
     }
+    
     required init(record: Record) throws {
         self.tag = record.line.tag
         self.xref = record.line.value ?? ""

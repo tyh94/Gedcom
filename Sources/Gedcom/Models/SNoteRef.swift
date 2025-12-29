@@ -12,7 +12,7 @@ public class SNoteRef: RecordProtocol {
         self.init(xref: record.line.value!)
     }
     
-    init(xref: String) {
+    public init(xref: String) {
         self.xref = xref
     }
     

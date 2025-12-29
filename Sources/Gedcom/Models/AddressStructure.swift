@@ -25,10 +25,10 @@ public class AddressStructure: RecordProtocol {
         "CTRY": \AddressStructure.country,
     ]
     
-    init(addr: String)
-    {
+    public init(addr: String) {
         address = addr
     }
+    
     required init(record: Record) throws {
         address = record.line.value ?? ""
         try updateFromRecord(record, keys: Self.keys)

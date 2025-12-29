@@ -40,6 +40,30 @@ public class Header: RecordProtocol {
         gedc = Gedc()
     }
     
+    public init(
+        gedc: Gedc,
+        schema: Schema? = nil,
+        source: HeaderSource? = nil,
+        date: DateTimeExact? = nil,
+        destination: String? = nil,
+        place: HeaderPlace? = nil,
+        copyright: String? = nil,
+        lang: String? = nil,
+        submitter: String? = nil,
+        note: NoteStructure? = nil
+    ) {
+        self.gedc = gedc
+        self.schema = schema
+        self.source = source
+        self.date = date
+        self.destination = destination
+        self.place = place
+        self.copyright = copyright
+        self.lang = lang
+        self.submitter = submitter
+        self.note = note
+    }
+    
     required init(record: Record) throws {
         gedc = Gedc()
         try updateFromRecord(record, keys: Self.keys)

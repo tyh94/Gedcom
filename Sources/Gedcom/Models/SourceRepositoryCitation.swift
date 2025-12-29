@@ -16,8 +16,14 @@ public class SourceRepositoryCitation: RecordProtocol {
         "CALN" : \SourceRepositoryCitation.callNumbers
     ]
     
-    init(xref: String) {
+    public init(
+        xref: String,
+        notes: [NoteStructure] = [],
+        callNumbers: [CallNumber] = []
+    ) {
         self.xref = xref
+        self.notes = notes
+        self.callNumbers = callNumbers
     }
     
     required init(record: Record) throws {

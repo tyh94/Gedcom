@@ -15,6 +15,10 @@ public class Schema: RecordProtocol {
     
     init() {}
     
+    public init(tags: [String: URL] = [:]) {
+        self.tags = tags
+    }
+    
     required init(record: Record) throws {
         var mutableSelf = self
         

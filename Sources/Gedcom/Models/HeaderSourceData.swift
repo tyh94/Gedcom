@@ -17,8 +17,14 @@ public class HeaderSourceData: RecordProtocol {
         "COPR": \HeaderSourceData.copyright,
     ]
     
-    init(data: String) {
+    public init(
+        data: String = "",
+        date: DateTimeExact? = nil,
+        copyright: String? = nil
+    ) {
         self.data = data
+        self.date = date
+        self.copyright = copyright
     }
     
     required init(record: Record) throws {

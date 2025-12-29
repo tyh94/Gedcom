@@ -14,8 +14,7 @@ public class FileTranslation: RecordProtocol {
         "FORM": \FileTranslation.form,
     ]
     
-    init(path: String, form: String)
-    {
+    public init(path: String, form: String) {
         self.path = path
         self.form = form
     }

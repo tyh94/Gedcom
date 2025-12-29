@@ -20,7 +20,7 @@ public class NonEventStructure: RecordProtocol {
         "SOUR": \NonEventStructure.citations,
     ]
     
-    init(
+    public init(
         kind: IndividualEventKind,
          date: DatePeriod? = nil,
          notes: [NoteStructure] = [],

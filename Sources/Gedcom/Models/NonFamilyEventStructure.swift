@@ -20,10 +20,12 @@ public class NonFamilyEventStructure: RecordProtocol {
         "SOUR": \NonFamilyEventStructure.citations,
     ]
     
-    init(kind: FamilyEventKind,
-         date: DatePeriod? = nil,
-         notes: [NoteStructure] = [],
-         citations: [SourceCitation] = []) {
+    public init(
+        kind: FamilyEventKind,
+        date: DatePeriod? = nil,
+        notes: [NoteStructure] = [],
+        citations: [SourceCitation] = []
+    ) {
         self.kind = kind
         self.date = date
         self.notes = notes

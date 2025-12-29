@@ -37,10 +37,32 @@ public class Repository: RecordProtocol {
         "CREA" : \Repository.creationDate
     ]
     
-    init(xref: String, name: String) {
+    public init(
+        xref: String,
+        name: String = "",
+        address: AddressStructure?,
+        phoneNumbers: [String] = [],
+        emails: [String] = [],
+        faxNumbers: [String] = [],
+        www: [URL] = [],
+        notes: [NoteStructure] = [],
+        identifiers: [IdentifierStructure] = [],
+        changeDate: ChangeDate? = nil,
+        creationDate: CreationDate? = nil
+    ) {
         self.xref = xref
         self.name = name
+        self.address = address
+        self.phoneNumbers = phoneNumbers
+        self.emails = emails
+        self.faxNumbers = faxNumbers
+        self.www = www
+        self.notes = notes
+        self.identifiers = identifiers
+        self.changeDate = changeDate
+        self.creationDate = creationDate
     }
+    
     required init(record: Record) throws {
         self.xref = record.line.xref!
         try updateFromRecord(record, keys: Self.keys)

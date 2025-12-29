@@ -13,10 +13,11 @@ public class SourceEventRole: RecordProtocol {
         "PHRASE" : \SourceEventRole.phrase,
     ]
     
-    init(role: String, phrase: String? = nil) {
+    public init(role: String, phrase: String? = nil) {
         self.role = role
         self.phrase = phrase
     }
+    
     required init(record: Record) throws {
         self.role = record.line.value ?? ""
         try updateFromRecord(record, keys: Self.keys)

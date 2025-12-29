@@ -63,7 +63,7 @@ public class FamilyAttribute : RecordProtocol {
         "UID": \FamilyAttribute.uid,
     ]
     
-    init(
+    public init(
         kind: FamilyAttributeKind,
         text: String? = nil,
         type: String? = nil,

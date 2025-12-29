@@ -13,12 +13,9 @@ public class DateTimeExact: RecordProtocol {
         "TIME": \DateTimeExact.time,
     ]
     
-    init()
-    {
-        
-    }
+    init() { }
     
-    init(date: String, time: String? = nil)
+    public init(date: String, time: String? = nil)
     {
         self.date = date
         self.time = time

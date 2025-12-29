@@ -19,8 +19,7 @@ public class Age: RecordProtocol {
         age = ""
     }
     
-    init(age: String, phrase: String? = nil)
-    {
+    public  init(age: String, phrase: String? = nil) {
         self.age = age
         self.phrase = phrase
     }

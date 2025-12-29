@@ -59,27 +59,29 @@ public class IndividualAttributeStructure  : RecordProtocol {
         "AGE" : \IndividualAttributeStructure.age,
     ]
     
-    init(kind: IndividualAttributeKind,
-         text: String? = nil,
-         type: String? = nil,
-         age: Age? = nil,
-         date: DateValue? = nil,
-         sdate: DateValue? = nil,
-         place: PlaceStructure? = nil,
-         address: AddressStructure? = nil,
-         phones: [String] = [],
-         emails: [String] = [],
-         fax: [String] = [],
-         www: [URL] = [],
-         agency: String? = nil,
-         religion: String? = nil,
-         cause: String? = nil,
-         restrictions: [Restriction] = [],
-         associations: [AssoiciationStructure] = [],
-         notes: [NoteStructure] = [],
-         citations: [SourceCitation] = [],
-         multimediaLinks: [MultimediaLink] = [],
-         uid: [UUID] = []) {
+    public init(
+        kind: IndividualAttributeKind,
+        text: String? = nil,
+        type: String? = nil,
+        age: Age? = nil,
+        date: DateValue? = nil,
+        sdate: DateValue? = nil,
+        place: PlaceStructure? = nil,
+        address: AddressStructure? = nil,
+        phones: [String] = [],
+        emails: [String] = [],
+        fax: [String] = [],
+        www: [URL] = [],
+        agency: String? = nil,
+        religion: String? = nil,
+        cause: String? = nil,
+        restrictions: [Restriction] = [],
+        associations: [AssoiciationStructure] = [],
+        notes: [NoteStructure] = [],
+        citations: [SourceCitation] = [],
+        multimediaLinks: [MultimediaLink] = [],
+        uid: [UUID] = []
+    ) {
         self.kind = kind
         self.text = text
         self.type = type

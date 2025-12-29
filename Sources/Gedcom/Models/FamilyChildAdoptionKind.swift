@@ -15,10 +15,11 @@ public class FamilyChildAdoptionKind: RecordProtocol {
         "PHRASE" : \FamilyChildAdoptionKind.phrase,
     ]
     
-    init(kind: AdoptionKind, phrase: String? = nil) {
+    public init(kind: AdoptionKind, phrase: String? = nil) {
         self.kind = kind
         self.phrase = phrase
     }
+    
     required init(record: Record) throws {
         self.kind = AdoptionKind(rawValue: record.line.value ?? "") ?? .BOTH
         try updateFromRecord(record, keys: Self.keys)

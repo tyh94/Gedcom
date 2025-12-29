@@ -12,7 +12,7 @@ public class CallNumber: RecordProtocol {
         "MEDI": \CallNumber.medium,
     ]
     
-    init(callNumber: String, medium: Medium? = nil) {
+    public init(callNumber: String, medium: Medium? = nil) {
         self.callNumber = callNumber
         self.medium = medium
     }

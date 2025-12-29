@@ -15,7 +15,7 @@ public class ChangeDate: RecordProtocol {
         "SNOTE": \ChangeDate.notes,
     ]
     
-    init(date: String, time: String? = nil, notes: [NoteStructure] = []) {
+    public init(date: String, time: String? = nil, notes: [NoteStructure] = []) {
         self.date = DateTime(date: date, time: time)
         self.notes = notes
     }

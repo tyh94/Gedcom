@@ -26,7 +26,7 @@ public class PlaceStructure: RecordProtocol {
         
     ]
     
-    init(
+    public init(
         place: CommaSeparatedStrings,
         form: CommaSeparatedStrings = [],
         lang: String? = nil

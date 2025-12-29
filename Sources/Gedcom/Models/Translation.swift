@@ -15,7 +15,7 @@ public class Translation: RecordProtocol {
         "LANG": \Translation.lang,
     ]
     
-    init(
+    public init(
         text: String,
         mime: String? = nil,
         lang: String? = nil

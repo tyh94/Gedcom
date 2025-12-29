@@ -27,7 +27,7 @@ public class SourceCitation: RecordProtocol {
         "SNOTE": \SourceCitation.notes,
     ]
     
-    init(
+    public init(
         xref: String,
         page: String? = nil,
         data: SourceCitationData? = nil,

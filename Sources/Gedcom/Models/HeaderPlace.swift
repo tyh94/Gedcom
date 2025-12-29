@@ -9,11 +9,12 @@ import Foundation
 
 public class HeaderPlace: RecordProtocol {
     public var form: CommaSeparatedStrings = []
+    
     nonisolated(unsafe) static let keys: [String: AnyKeyPath] = [
         "FORM": \HeaderPlace.form,
     ]
     
-    init(form: CommaSeparatedStrings) {
+    public init(form: CommaSeparatedStrings) {
         self.form = form
     }
     

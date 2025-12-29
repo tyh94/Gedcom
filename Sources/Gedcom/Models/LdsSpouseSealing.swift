@@ -23,7 +23,7 @@ public class LdsSpouseSealing: RecordProtocol {
         "SOUR": \LdsSpouseSealing.citations,
     ]
     
-    init(
+    public init(
         date: DateValue? = nil,
          temple: String? = nil,
          place: PlaceStructure? = nil,

@@ -15,7 +15,7 @@ public class SourceEventData: RecordProtocol {
         "ROLE" : \SourceEventData.role,
     ]
     
-    init(event: String, phrase: String? = nil, role: SourceEventRole? = nil) {
+    public init(event: String, phrase: String? = nil, role: SourceEventRole? = nil) {
         self.event = event
         self.phrase = phrase
         self.role = role

@@ -16,6 +16,12 @@ public class SourceData: RecordProtocol {
         "SNOTE": \SourceData.notes
     ]
     
+    public init(events: [SourceDataEvents] = [], agency: String? = nil, notes: [NoteStructure] = []) {
+        self.events = events
+        self.agency = agency
+        self.notes = notes
+    }
+    
     init() {
         
     }

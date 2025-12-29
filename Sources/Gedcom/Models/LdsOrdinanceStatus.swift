@@ -15,10 +15,11 @@ public class LdsOrdinanceStatus: RecordProtocol {
         "DATE": \LdsOrdinanceStatus.date,
     ]
     
-    init(kind: LdsOrdinanceStatusKind, date: DateTime) {
+    public init(kind: LdsOrdinanceStatusKind, date: DateTime) {
         self.kind = kind
         self.date = date
     }
+    
     required init(record: Record) throws {
         self.date = DateTime()
         self.kind = LdsOrdinanceStatusKind(rawValue: record.line.value ?? "")!

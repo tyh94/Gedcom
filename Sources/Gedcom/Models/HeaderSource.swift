@@ -13,6 +13,7 @@ public class HeaderSource: RecordProtocol {
     public var name: String?
     public var corporation: HeaderSourceCorporation?
     public var data: HeaderSourceData?
+    
     nonisolated(unsafe) static let keys: [String: AnyKeyPath] = [
         "VERS": \HeaderSource.version,
         "NAME": \HeaderSource.name,
@@ -20,8 +21,18 @@ public class HeaderSource: RecordProtocol {
         "DATA": \HeaderSource.data,
     ]
     
-    init(source: String) {
+    public init(
+        source: String,
+        version: String? = nil,
+        name: String? = nil,
+        corporation: HeaderSourceCorporation? = nil,
+        data: HeaderSourceData? = nil
+    ) {
         self.source = source
+        self.version = version
+        self.name = name
+        self.corporation = corporation
+        self.data = data
     }
     
     required init(record: Record) throws {

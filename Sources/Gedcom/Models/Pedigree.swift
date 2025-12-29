@@ -14,8 +14,11 @@ public class Pedigree: RecordProtocol {
     nonisolated(unsafe) static let keys : [String: AnyKeyPath] = [
         "PHRASE" : \Pedigree.phrase,
     ]
-    init(kind: PedigreeKind,
-         phrase: String? = nil) {
+    
+    public init(
+        kind: PedigreeKind,
+        phrase: String? = nil
+    ) {
         self.kind = kind
         self.phrase = phrase
     }

@@ -15,10 +15,11 @@ public class FamilyChildAdoption: RecordProtocol {
         "ADOP" : \FamilyChildAdoption.adoption,
     ]
     
-    init(xref: String, adoption: FamilyChildAdoptionKind? = nil) {
+    public init(xref: String, adoption: FamilyChildAdoptionKind? = nil) {
         self.xref = xref
         self.adoption = adoption
     }
+    
     required init(record: Record) throws {
         self.xref = record.line.value ?? ""
         try updateFromRecord(record, keys: Self.keys)

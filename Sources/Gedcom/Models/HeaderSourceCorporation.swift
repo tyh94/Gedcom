@@ -23,8 +23,20 @@ public class HeaderSourceCorporation: RecordProtocol {
         "WWW": \HeaderSourceCorporation.www,
     ]
     
-    init(corp: String) {
-        corporation = corp
+    public init(
+        corporation: String = "",
+        address: AddressStructure?,
+        phone: [String] = [],
+        email: [String] = [],
+        fax: [String] = [],
+        www: [URL] = []
+    ) {
+        self.corporation = corporation
+        self.address = address
+        self.phone = phone
+        self.email = email
+        self.fax = fax
+        self.www = www
     }
     
     required init(record: Record) throws {

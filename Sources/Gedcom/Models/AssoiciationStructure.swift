@@ -22,7 +22,7 @@ public class AssoiciationStructure: RecordProtocol {
         "SOUR": \AssoiciationStructure.citations,
     ]
     
-    init(
+    public init(
         xref: String,
         phrase: String? = nil,
         role: Role? = nil,

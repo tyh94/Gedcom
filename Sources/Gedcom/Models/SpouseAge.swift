@@ -15,11 +15,13 @@ public class SpouseAge: RecordProtocol {
     nonisolated(unsafe) static let keys: [String: AnyKeyPath] = [
         "AGE": \SpouseAge.age,
     ]
-    init(kind: String, age: String, phrase: String? = nil)
+    
+    public init(kind: String, age: String, phrase: String? = nil)
     {
         self.kind = kind
         self.age = Age(age: age, phrase: phrase)
     }
+    
     required init(record: Record) throws {
         kind = record.line.tag
         age = Age()

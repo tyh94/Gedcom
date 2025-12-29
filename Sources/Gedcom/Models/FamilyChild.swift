@@ -21,15 +21,18 @@ public class FamilyChild: RecordProtocol {
         "SNOTE" : \FamilyChild.notes,
     ]
     
-    public init(xref: String,
-                pedigree: Pedigree? = nil,
-                status: ChildStatus? = nil,
-                notes: [NoteStructure] = []) {
+    public init(
+        xref: String,
+        pedigree: Pedigree? = nil,
+        status: ChildStatus? = nil,
+        notes: [NoteStructure] = []
+    ) {
         self.xref = xref
         self.pedigree = pedigree
         self.status = status
         self.notes = notes
     }
+    
     required init(record: Record) throws {
         self.xref = record.line.value ?? ""
         try updateFromRecord(record, keys: Self.keys)

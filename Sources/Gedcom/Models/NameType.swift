@@ -15,7 +15,7 @@ public class NameType: RecordProtocol {
         "PHRASE" : \NameType.phrase,
     ]
     
-    init(kind: NameTypeKind, phrase: String? = nil) {
+    public init(kind: NameTypeKind, phrase: String? = nil) {
         self.kind = kind
         self.phrase = phrase
     }

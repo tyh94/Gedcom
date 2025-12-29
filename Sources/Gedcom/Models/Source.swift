@@ -39,8 +39,34 @@ public class Source: RecordProtocol {
         "CREA": \Source.creationDate
     ]
     
-    init(xref: String) {
+    public init(
+        xref: String,
+        data: SourceData? = nil,
+        author: String? = nil,
+        title: String? = nil,
+        abbreviation: String? = nil,
+        publication: String? = nil,
+        text: SourceText? = nil,
+        sourceRepoCitation: [SourceRepositoryCitation]= [],
+        identifiers: [IdentifierStructure]= [],
+        notes: [NoteStructure]= [],
+        multimediaLinks: [MultimediaLink]= [],
+        changeDate: ChangeDate? = nil,
+        creationDate: CreationDate? = nil
+    ) {
         self.xref = xref
+        self.data = data
+        self.author = author
+        self.title = title
+        self.abbreviation = abbreviation
+        self.publication = publication
+        self.text = text
+        self.sourceRepoCitation = sourceRepoCitation
+        self.identifiers = identifiers
+        self.notes = notes
+        self.multimediaLinks = multimediaLinks
+        self.changeDate = changeDate
+        self.creationDate = creationDate
     }
     
     required init(record: Record) throws {

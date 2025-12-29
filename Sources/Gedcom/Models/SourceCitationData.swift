@@ -14,7 +14,7 @@ public class SourceCitationData: RecordProtocol {
         "TEXT": \SourceCitationData.text,
     ]
     
-    init(date: DateValue? = nil) {
+    public init(date: DateValue? = nil) {
         self.date = date
     }
     

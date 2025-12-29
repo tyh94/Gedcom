@@ -15,7 +15,7 @@ public class REFN: RecordProtocol {
         "TYPE": \REFN.type,
     ]
     
-    init(ident: String, type: String? = nil) {
+    public init(ident: String, type: String? = nil) {
         self.refn = ident
         self.type = type
     }
@@ -37,7 +37,7 @@ public class REFN: RecordProtocol {
 public class UID: RecordProtocol {
     public var uid: UUID
     
-    init(ident: String) {
+    public init(ident: String) {
         self.uid = UUID(uuidString: ident) ?? UUID()
     }
     
@@ -59,7 +59,7 @@ public class EXID: RecordProtocol {
         "TYPE" : \EXID.type,
     ]
     
-    init(ident: String, type: String? = nil) {
+    public init(ident: String, type: String? = nil) {
         self.exid = ident
         self.type = type
     }

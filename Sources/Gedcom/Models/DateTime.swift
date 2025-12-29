@@ -15,8 +15,7 @@ public class DateTime: RecordProtocol {
     
     init() { }
     
-    init(date: String, time: String? = nil)
-    {
+    public init(date: String, time: String? = nil) {
         self.date = date
         self.time = time
     }

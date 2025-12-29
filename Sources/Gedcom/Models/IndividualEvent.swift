@@ -62,30 +62,31 @@ public class IndividualEvent: RecordProtocol {
         "FAMC" : \IndividualEvent.familyChild,
     ]
     
-    public init(kind: IndividualEventKind,
-                text: String? = nil,
-                occurred: Bool? = nil, // Text == Y
-                type: String? = nil,
-                familyChild: FamilyChildAdoption? = nil,
-                age: Age? = nil,
-                date: DateValue? = nil,
-                sdate: DateValue? = nil,
-                place: PlaceStructure? = nil,
-                address: AddressStructure? = nil,
-                phones: [String] = [],
-                emails: [String] = [],
-                fax: [String] = [],
-                www: [URL] = [],
-                agency: String? = nil,
-                religion: String? = nil,
-                cause: String? = nil,
-                restrictions: [Restriction] = [],
-                associations: [AssoiciationStructure] = [],
-                notes: [NoteStructure] = [],
-                citations: [SourceCitation] = [],
-                multimediaLinks: [MultimediaLink] = [],
-                uid: [UUID] = []) {
-        
+    public init(
+        kind: IndividualEventKind,
+        text: String? = nil,
+        occurred: Bool? = nil, // Text == Y
+        type: String? = nil,
+        familyChild: FamilyChildAdoption? = nil,
+        age: Age? = nil,
+        date: DateValue? = nil,
+        sdate: DateValue? = nil,
+        place: PlaceStructure? = nil,
+        address: AddressStructure? = nil,
+        phones: [String] = [],
+        emails: [String] = [],
+        fax: [String] = [],
+        www: [URL] = [],
+        agency: String? = nil,
+        religion: String? = nil,
+        cause: String? = nil,
+        restrictions: [Restriction] = [],
+        associations: [AssoiciationStructure] = [],
+        notes: [NoteStructure] = [],
+        citations: [SourceCitation] = [],
+        multimediaLinks: [MultimediaLink] = [],
+        uid: [UUID] = []
+    ) {
         self.kind = kind
         self.text = text
         self.occurred = occurred ?? false

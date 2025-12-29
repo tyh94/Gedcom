@@ -11,12 +11,12 @@ import Foundation
 public class Gedc: RecordProtocol {
     public var vers: String = "7.0"
     
-    nonisolated(unsafe) static let keys : [String: AnyKeyPath] = [
-        "VERS" : \Gedc.vers,
+    nonisolated(unsafe) static let keys: [String: AnyKeyPath] = [
+        "VERS": \Gedc.vers,
     ]
-    init() {
-        
-    }
+    
+    public init() { }
+    
     required init(record: Record) throws {
         try updateFromRecord(record, keys: Self.keys)
     }

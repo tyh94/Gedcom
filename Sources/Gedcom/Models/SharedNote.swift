@@ -43,7 +43,7 @@ public class SharedNote: RecordProtocol {
         "CREA": \SharedNote.creationDate
     ]
     
-    init(xref: String, text: String, mime: String? = nil, lang: String? = nil) {
+    public init(xref: String, text: String, mime: String? = nil, lang: String? = nil) {
         self.xref = xref
         self.text = text
         self.mimeType = mime

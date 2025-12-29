@@ -14,7 +14,7 @@ public class DatePeriod: RecordProtocol {
         "PHRASE": \DatePeriod.phrase,
     ]
     
-    init(
+    public init(
         date: String,
         time: String? = nil,
         phrase: String? = nil

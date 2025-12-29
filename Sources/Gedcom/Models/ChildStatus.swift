@@ -15,7 +15,7 @@ public class ChildStatus: RecordProtocol {
         "PHRASE": \ChildStatus.phrase,
     ]
     
-    init(kind: ChildStatusKind, phrase: String? = nil) {
+    public init(kind: ChildStatusKind, phrase: String? = nil) {
         self.kind = kind
         self.phrase = phrase
     }
