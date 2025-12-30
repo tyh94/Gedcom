@@ -25,7 +25,7 @@ public class HeaderSourceCorporation: RecordProtocol {
     
     public init(
         corporation: String = "",
-        address: AddressStructure?,
+        address: AddressStructure? = nil,
         phone: [String] = [],
         email: [String] = [],
         fax: [String] = [],

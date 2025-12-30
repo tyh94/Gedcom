@@ -47,10 +47,10 @@ public class Source: RecordProtocol {
         abbreviation: String? = nil,
         publication: String? = nil,
         text: SourceText? = nil,
-        sourceRepoCitation: [SourceRepositoryCitation]= [],
-        identifiers: [IdentifierStructure]= [],
-        notes: [NoteStructure]= [],
-        multimediaLinks: [MultimediaLink]= [],
+        sourceRepoCitation: [SourceRepositoryCitation] = [],
+        identifiers: [IdentifierStructure] = [],
+        notes: [NoteStructure] = [],
+        multimediaLinks: [MultimediaLink] = [],
         changeDate: ChangeDate? = nil,
         creationDate: CreationDate? = nil
     ) {

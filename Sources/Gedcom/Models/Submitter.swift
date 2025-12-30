@@ -43,7 +43,7 @@ public class Submitter: RecordProtocol {
     public init(
         xref: String,
         name: String = "",
-        address: AddressStructure?,
+        address: AddressStructure? = nil,
         phone: [String] = [],
         email: [String] = [],
         fax: [String] = [],

@@ -40,7 +40,7 @@ public class Repository: RecordProtocol {
     public init(
         xref: String,
         name: String = "",
-        address: AddressStructure?,
+        address: AddressStructure? = nil,
         phoneNumbers: [String] = [],
         emails: [String] = [],
         faxNumbers: [String] = [],

@@ -18,7 +18,7 @@ import Foundation
     header.source = HeaderSource(source: "https://gedcom.io/")
     header.source?.version = "0.4"
     header.source?.name = "GEDCOM Steering Committee"
-    header.source?.corporation = HeaderSourceCorporation(corp: "FamilySearch")
+    header.source?.corporation = HeaderSourceCorporation(corporation: "FamilySearch")
     header.source?.corporation?.address = AddressStructure(addr: "Family History Department\n15 East South Temple Street\nSalt Lake City, UT 84150 USA")
 
     header.source?.corporation?.address?.adr1 = "Family History Department"
@@ -1380,7 +1380,7 @@ import Foundation
   @Test("Source Record") func source() {
     let source = Source(xref: "@S1@")
     source.data = SourceData()
-    source.data?.events += [SourceDataEvents(types: ["BIRT", "DEAT"])]
+    source.data?.events += [SourceDataEvents(eventTypes: ["BIRT", "DEAT"])]
     source.data?.events[0].period = SourceDataEventPeriod(date: "FROM 1701 TO 1800",
                                                           phrase: "18th century")
     source.data?.events[0].place = PlaceStructure(place: ["Some City",
@@ -1411,7 +1411,7 @@ import Foundation
     source.data?.events[0].place?.notes.append(.sNote(SNoteRef(xref: "@N1@")))
 
 
-    source.data?.events += [SourceDataEvents(types: ["MARR"])]
+    source.data?.events += [SourceDataEvents(eventTypes: ["MARR"])]
     source.data?.events[1].period = SourceDataEventPeriod(date: "FROM 1701 TO 1800",
                                                           phrase: "18th century")
 
