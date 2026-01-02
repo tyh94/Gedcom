@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PersonalNamePiece: Equatable {
+public enum PersonalNamePiece: Hashable {
     case namePrefix(String)
     case givenName(String)
     case nickname(String)

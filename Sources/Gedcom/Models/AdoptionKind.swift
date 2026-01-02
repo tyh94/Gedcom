@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum AdoptionKind : String {
+public enum AdoptionKind: String {
   case HUSB
   case WIFE
   case BOTH
