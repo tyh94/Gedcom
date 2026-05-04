@@ -13,7 +13,6 @@ enum Calendar {
     case other
 }
 
-
 enum Epoch {
     case bce
     case ce

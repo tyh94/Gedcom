@@ -22,7 +22,7 @@ public struct GedcomSimpleDate: Codable, Equatable {
     public let month: String?
     public let day: Int?
     public let epoch: String? // BC, BCE...
-
+    
     public init(calendar: GedcomDateCalendar = .gregorian, year: Int? = nil, month: String? = nil, day: Int? = nil, epoch: String? = nil) {
         self.calendar = calendar
         self.year = year
@@ -44,6 +44,7 @@ public enum GedcomDate: Codable, Equatable {
         case calculated = "CAL"
         case estimated = "EST"
     }
+    
 }
 
 public enum GedcomDateParser {
@@ -56,7 +57,7 @@ public enum GedcomDateParser {
         
         let upper = trimmed.uppercased()
         let parts = upper.components(separatedBy: .whitespaces) // Simple tokenization
-
+        
         // Check Range Keywords
         if parts.first == "BET" {
             // Expect BET <Date> AND <Date>
@@ -77,10 +78,10 @@ public enum GedcomDateParser {
                 let s = parseSimple(startStr)
                 let e = parseSimple(endStr)
                 if s != nil || e != nil {
-                     // FROM X TO Y
-                     // If one is missing, it's still a range? strict G7 says "FROM <Date> TO <Date>" is RangePeriod.
-                     // But "FROM <Date>" is also valid.
-                     return .range(start: s, end: e)
+                    // FROM X TO Y
+                    // If one is missing, it's still a range? strict G7 says "FROM <Date> TO <Date>" is RangePeriod.
+                    // But "FROM <Date>" is also valid.
+                    return .range(start: s, end: e)
                 }
             } else {
                 // FROM <Date>
@@ -113,14 +114,14 @@ public enum GedcomDateParser {
         
         // INT handling? INT <Date> (<Phrase>)
         if parts.first == "INT" {
-             // Fallback to phrase or simple parsing?
-             // INT 1800 (Eighteen Hundred)
-             // Parsing the date part might work.
-             let dateStr = parts.dropFirst().joined(separator: " ")
-             // This is tricky without lookahead for parens.
-             // For now, treat exact date as fallback
+            // Fallback to phrase or simple parsing?
+            // INT 1800 (Eighteen Hundred)
+            // Parsing the date part might work.
+            let dateStr = parts.dropFirst().joined(separator: " ")
+            // This is tricky without lookahead for parens.
+            // For now, treat exact date as fallback
         }
-
+        
         return nil
     }
     
@@ -170,9 +171,9 @@ public enum GedcomDateParser {
             // GEDCOM allow: "MAY 1990" or "1990".
             // If tokens[0] was 1990, we assigned it to `day`. Oops.
             if let d = day, d > 31 {
-                 // Likely a year
-                 year = d
-                 day = nil
+                // Likely a year
+                year = d
+                day = nil
             }
         }
         
@@ -217,5 +218,83 @@ public enum GedcomDateParser {
         }
         
         return nil
+    }
+}
+
+extension GedcomDate {
+    public func toDate() -> Date? {
+        switch self {
+        case .exact(let simpleDate):
+            return simpleDate.toDate()
+            
+        case .approx(_, let simpleDate):
+            return simpleDate.toDate()
+            
+        case .between(let start, let end):
+            guard let startDate = start.toDate(),
+                  let endDate = end.toDate() else { return nil }
+            let midInterval = (startDate.timeIntervalSince1970 + endDate.timeIntervalSince1970) / 2
+            return Date(timeIntervalSince1970: midInterval)
+            
+        case .range(let start, let end):
+            return start?.toDate() ?? end?.toDate()
+            
+        case .phrase(let phrase):
+            return parsePhraseToDate(phrase)
+        }
+    }
+    
+    private func parsePhraseToDate(_ phrase: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        let formats = ["yyyy", "MMM yyyy", "d MMM yyyy", "MMMM yyyy"]
+        
+        for format in formats {
+            formatter.dateFormat = format
+            if let date = formatter.date(from: phrase) {
+                return date
+            }
+        }
+        return nil
+    }
+}
+
+extension GedcomSimpleDate {
+    public func toDate() -> Date? {
+        var components = DateComponents()
+        
+        let calendar = Foundation.Calendar(identifier: .gregorian)
+        
+        components.year = self.year
+        components.day = self.day
+        components.month = parseMonth(monthString: self.month) // Используем ваш метод
+        
+        // Обработка эпохи BC/BCE
+        if let epoch = self.epoch, epoch.uppercased() == "BC" || epoch.uppercased() == "BCE" {
+            if let year = components.year {
+                components.year = -year + 1
+            }
+        }
+        
+        // Заполняем пропущенные компоненты
+        if components.month == nil && components.year != nil {
+            components.month = 1
+        }
+        if components.day == nil && components.month != nil {
+            components.day = 1
+        }
+        
+        // Для случая только года
+        if components.year != nil && components.month == nil {
+            components.month = 1
+            components.day = 1
+        }
+        
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        
+        return calendar.date(from: components)
     }
 }
