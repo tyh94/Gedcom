@@ -20,6 +20,12 @@ public class DateValue: RecordProtocol {
         self.phrase = phrase
     }
     
+    public init(date: GedcomDate, time: String? = nil, phrase: String? = nil) {
+        self.date = date.gedcomString
+        self.time = time
+        self.phrase = phrase
+    }
+    
     required init(record: Record) throws {
         date = record.line.value ?? ""
         try updateFromRecord(record, keys: Self.keys)

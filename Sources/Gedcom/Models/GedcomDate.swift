@@ -14,6 +14,46 @@ public enum GedcomDateCalendar: String, Codable {
     case french = "FRENCH" // @#DFRENCH R@
     case roman = "ROMAN"   // User extension example? Standards vary.
     case unknown = "UNKNOWN"
+    
+    var toCalendar: Calendar {
+        switch self {
+        case .gregorian:
+            return Calendar(identifier: .gregorian)
+        case .julian:
+            return Calendar(identifier: .gregorian)
+        case .hebrew:
+            return Calendar(identifier: .hebrew)
+        case .french:
+            return Calendar(identifier: .gregorian)
+        case .roman:
+            return Calendar(identifier: .gregorian)
+        case .unknown:
+            return Calendar(identifier: .gregorian)
+        }
+    }
+}
+
+public enum Epoch: Codable, Equatable, RawRepresentable {
+    case bc
+    case ad
+    
+    public init?(rawValue string: String) {
+        let upper = string.uppercased()
+        if upper == "BC" || upper == "BCE" || upper == "B.C." {
+            self = .bc
+        } else if upper == "AD" || upper == "CE" {
+            self = .ad
+        } else {
+            return nil
+        }
+    }
+    
+    public var rawValue: String {
+        switch self {
+        case .bc: return "BC"
+        case .ad: return "AD"
+        }
+    }
 }
 
 public struct GedcomSimpleDate: Codable, Equatable {
@@ -21,9 +61,15 @@ public struct GedcomSimpleDate: Codable, Equatable {
     public let year: Int?
     public let month: String?
     public let day: Int?
-    public let epoch: String? // BC, BCE...
+    public let epoch: Epoch?
     
-    public init(calendar: GedcomDateCalendar = .gregorian, year: Int? = nil, month: String? = nil, day: Int? = nil, epoch: String? = nil) {
+    public init(
+        calendar: GedcomDateCalendar = .gregorian,
+        year: Int? = nil,
+        month: String? = nil,
+        day: Int? = nil,
+        epoch: Epoch? = nil
+    ) {
         self.calendar = calendar
         self.year = year
         self.month = month
@@ -44,7 +90,6 @@ public enum GedcomDate: Codable, Equatable {
         case calculated = "CAL"
         case estimated = "EST"
     }
-    
 }
 
 public enum GedcomDateParser {
@@ -143,9 +188,9 @@ public enum GedcomDateParser {
         }
         
         // Epoch at end?
-        var epoch: String? = nil
-        if let last = tokens.last, (last == "BC" || last == "BCE" || last == "B.C.") {
-            epoch = last
+        var epoch: Epoch? = nil
+        if let last = tokens.last, let epochRaw = Epoch(rawValue: last) {
+            epoch = epochRaw
             tokens.removeLast()
         }
         
@@ -264,14 +309,14 @@ extension GedcomSimpleDate {
     public func toDate() -> Date? {
         var components = DateComponents()
         
-        let calendar = Foundation.Calendar(identifier: .gregorian)
+        let calendar = calendar.toCalendar
         
         components.year = self.year
         components.day = self.day
-        components.month = parseMonth(monthString: self.month) // Используем ваш метод
+        components.month = parseMonth(monthString: self.month)
         
         // Обработка эпохи BC/BCE
-        if let epoch = self.epoch, epoch.uppercased() == "BC" || epoch.uppercased() == "BCE" {
+        if let epoch = self.epoch, epoch == .bc {
             if let year = components.year {
                 components.year = -year + 1
             }
@@ -296,5 +341,47 @@ extension GedcomSimpleDate {
         components.second = 0
         
         return calendar.date(from: components)
+    }
+}
+
+extension GedcomDate {
+    public var gedcomString: String {
+        switch self {
+        case .exact(let date):
+            return simpleDateString(date)
+        case .approx(let kind, let date):
+            return "\(kind.rawValue) \(simpleDateString(date))"
+        case .between(let start, let end):
+            return "BET \(simpleDateString(start)) AND \(simpleDateString(end))"
+        case .range(let start, let end):
+            if let s = start, let e = end {
+                return "FROM \(simpleDateString(s)) TO \(simpleDateString(e))"
+            } else if let s = start {
+                return "FROM \(simpleDateString(s))"
+            } else if let e = end {
+                return "TO \(simpleDateString(e))"
+            } else {
+                return ""
+            }
+        case .phrase(let text):
+            return text
+        }
+    }
+    
+    private func simpleDateString(_ date: GedcomSimpleDate) -> String {
+        var parts: [String] = []
+        if date.calendar != .gregorian {
+            switch date.calendar {
+            case .julian: parts.append("@#DJULIAN@")
+            case .hebrew: parts.append("@#DHEBREW@")
+            case .french: parts.append("@#DFRENCH R@")
+            default: break
+            }
+        }
+        if let day = date.day { parts.append("\(day)") }
+        if let month = date.month { parts.append(month) }
+        if let year = date.year { parts.append("\(year)") }
+        if let epoch = date.epoch { parts.append(epoch.rawValue) }
+        return parts.joined(separator: " ")
     }
 }

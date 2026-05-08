@@ -5,19 +5,6 @@
 //  Created by Татьяна Макеева on 12.12.2025.
 //
 
-enum Calendar {
-    case gregorian
-    case julian
-    case frenchRevolutionary
-    case hebrew
-    case other
-}
-
-enum Epoch {
-    case bce
-    case ce
-}
-
 public func parseMonth(monthString: String?) -> Int? {
     guard let monthString else { return nil }
     let monthNumbers: [String:Int] = [
@@ -35,3 +22,21 @@ public func parseMonth(monthString: String?) -> Int? {
     return monthNumbers[monthString.uppercased()]
 }
 
+public func monthString(from number: Int, calendar: GedcomDateCalendar = .gregorian) -> String? {
+    let names: [String]
+    switch calendar {
+    case .gregorian, .julian:
+        names = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+                 "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"]
+    case .french:
+        names = ["VEND", "BRUM", "FRIM", "NIVO", "PLUV", "VENT",
+                 "GERM", "FLOR", "PRAI", "MESS", "THER", "FRUC", "COMP"]
+    case .hebrew:
+        names = ["TSH", "CSH", "KSL", "TVT", "SHV", "ADR",
+                 "ADS", "NSN", "IYR", "SVN", "TMZ", "AAV", "ELL"]
+    default:
+        return nil
+    }
+    guard number >= 1, number <= names.count else { return nil }
+    return names[number - 1]
+}
